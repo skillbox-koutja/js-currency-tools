@@ -52,7 +52,7 @@ const renderConverter = (props) => {
   return `<div class="dashboard">
   <header class="header">
     <a href="#dashboard">Open Currency Rates</a>
-    <h1>Currency Rates</h1>
+    <h1>Currency Converter</h1>
   </header>
     <ul class="currencies">${[fromCard, toCard].join('')}</ul>
   </div>`;
