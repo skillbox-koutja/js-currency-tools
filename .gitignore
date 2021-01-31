@@ -1,0 +1,10 @@
+###> system and idea
+*.git
+.DS_STORE
+.DS_Store
+.idea/
+###
+/node_modules/
+*.log
+coverage
+
