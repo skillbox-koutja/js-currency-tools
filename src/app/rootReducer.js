@@ -7,8 +7,6 @@ const handlers = {
 };
 
 if (process.env.NODE_ENV === 'development') {
-  // const initAction = '__INIT__';
-  // handlers[initAction] = (state) => {return state};
   window.stateContainer = {
     handlers,
   };

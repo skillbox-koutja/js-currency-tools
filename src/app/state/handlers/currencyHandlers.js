@@ -1,4 +1,5 @@
 import { actions } from '@app/state/actions/currencyActions.js';
+import { applyChanges, changeState } from '@core/stateContainer/utils.js';
 
 const handlers = {};
 
@@ -39,12 +40,10 @@ handlers[actions.REMOVE_FAVORITE] = (state, action) => {
     ...next,
   };
 };
-const applyChanges = (state, action) => ({
-  ...state,
-  ...action.payload,
-});
+
 handlers[actions.START_FETCH_RATES] = applyChanges;
 handlers[actions.FINISH_FETCH_RATES] = applyChanges;
 handlers[actions.FAILED_FETCH_RATES] = applyChanges;
+handlers[actions.CHANGE_FROM_VALUE] = changeState('value');
 
 export default handlers;

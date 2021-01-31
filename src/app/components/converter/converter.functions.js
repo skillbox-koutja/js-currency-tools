@@ -13,7 +13,12 @@ const createCard = (props) => {
       <img src=${currency.flagUrl} class="flag" alt="${currency.name}">
       <div class="info">
         <p class="input">
-        <span class="currency-symbol">${currency.glyph}</span><input placeholder="0.0000" value=${inputValue}></p>
+          <span class="currency-symbol">${currency.glyph}</span>
+          <input id="${from ? 'from-currency-input' : 'to-currency-input'}" 
+                value=${inputValue}
+                ${from ? '' : 'disabled'}
+          >
+        </p>
         <p class="currency-name">${currency.symbol} - ${currency.name}</p>
         <p class="base-currency-rate">1 ${fromSymbol} = ${exchangeRate} ${currency.symbol}</p>
       </div>

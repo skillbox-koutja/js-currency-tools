@@ -4,6 +4,7 @@ export const actions = {
   START_FETCH_RATES: 'START_FETCH_RATES',
   FINISH_FETCH_RATES: 'FINISH_FETCH_RATES',
   FAILED_FETCH_RATES: 'FAILED_FETCH_RATES',
+  CHANGE_FROM_VALUE: 'CHANGE_FROM_VALUE',
 };
 
 export const startFetchRates = () => ({
@@ -44,4 +45,8 @@ export const addFavorite = (symbol) => ({
 export const removeFavorite = (symbol) => ({
   type: actions.REMOVE_FAVORITE,
   payload: symbol,
+});
+export const changeFromValue = (value) => ({
+  type: actions.CHANGE_FROM_VALUE,
+  payload: value,
 });

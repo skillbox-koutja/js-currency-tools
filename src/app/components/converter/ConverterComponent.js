@@ -1,6 +1,8 @@
 import { preventDefault } from '@core/utils';
 import StoreSubscriber from '@core/stateContainer/StoreSubscriber.js';
 import StateComponent from '@core/components/StateComponent.js';
+import $ from '@core/dom';
+import { changeFromValue } from '@app/state/actions/currencyActions.js';
 import renderConverter from './converter.functions.js';
 
 export default class ConverterComponent extends StateComponent {
@@ -9,8 +11,11 @@ export default class ConverterComponent extends StateComponent {
   constructor($root, options) {
     super($root, {
       name: 'Converter',
-      listeners: [],
+      listeners: [
+        'input',
+      ],
       subscribe: [
+        'value',
         'loadedRates',
         'loadingRates',
         'rates',
@@ -45,6 +50,18 @@ export default class ConverterComponent extends StateComponent {
     const { $root } = this;
 
     return $root;
+  }
+
+  onInput(event) {
+    const text = $(event.target).text();
+
+    const { inputTimer } = this;
+    if (!inputTimer) {
+      clearTimeout(inputTimer);
+    }
+    this.inputTimer = setTimeout(() => {
+      this.$actionDispatch(changeFromValue(text));
+    }, 1000);
   }
 
   init() {
