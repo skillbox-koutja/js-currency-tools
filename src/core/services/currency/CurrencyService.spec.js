@@ -26,7 +26,7 @@ describe('CurrencyService:', () => {
   });
 
   describe('should convert correct rates to RUB and then back to USD', () => {
-    const rubRates = CurrencyService.changeRates({
+    const rubRates = service.changeRates({
       prevRates: rates,
       nextBase: 'RUB',
     });
@@ -35,7 +35,7 @@ describe('CurrencyService:', () => {
         expect(rubRates[currency]).toBeCloseTo(expectedRates[currency]);
       });
     });
-    const usdRates = CurrencyService.changeRates({
+    const usdRates = service.changeRates({
       prevRates: rubRates,
       nextBase: 'USD',
     });
@@ -47,7 +47,7 @@ describe('CurrencyService:', () => {
   });
 
   test('should correct convert from "USD" to "RUB"', () => {
-    const result = CurrencyService.convert({
+    const result = service.convert({
       value: 1,
       from: 'USD',
       to: 'RUB',
@@ -56,7 +56,7 @@ describe('CurrencyService:', () => {
     expect(result).toBeCloseTo(75.955);
   });
   test('should correct convert from "RUB" to "USD"', () => {
-    const result = CurrencyService.convert({
+    const result = service.convert({
       value: 1,
       from: 'RUB',
       to: 'USD',

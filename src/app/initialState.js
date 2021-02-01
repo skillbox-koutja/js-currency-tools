@@ -23,6 +23,7 @@ const defaultState = {
   loadingRates: true,
   baseCurrency: 'RUB',
   rates: {},
+  openedCurrencySelector: null,
   value: 1,
   from: 'USD',
   to: 'RUB',

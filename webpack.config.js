@@ -110,7 +110,6 @@ export default {
   resolve: {
     extensions: ['.js', '.json', '.png'],
     alias: {
-      '@models': path.resolve(__dirname, 'src/models'),
       '@app': path.resolve(__dirname, 'src/app'),
       '@core': path.resolve(__dirname, 'src/core'),
     },

@@ -49,7 +49,7 @@ export default class Component extends DomListener {
   }
 
   // Уведомляем слушателей про событие event
-  $eventDispatch(event, ...args) {
+  $dispatchEvent(event, ...args) {
     this.eventDispatcher.dispatch(event, ...args);
   }
 
@@ -59,7 +59,7 @@ export default class Component extends DomListener {
     this.unsubscribers.push(unsub);
   }
 
-  $actionDispatch(action) {
+  $dispatchAction(action) {
     this.store.dispatch(action);
   }
 

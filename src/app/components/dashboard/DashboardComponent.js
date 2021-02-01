@@ -82,7 +82,7 @@ export default class DashboardComponent extends StateComponent {
         ? removeFavorite(symbol)
         : addFavorite(symbol);
 
-      this.$actionDispatch(action);
+      this.$dispatchAction(action);
     }
   }
 }

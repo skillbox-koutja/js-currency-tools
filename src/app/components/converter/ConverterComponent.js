@@ -2,7 +2,11 @@ import { preventDefault } from '@core/utils';
 import StoreSubscriber from '@core/stateContainer/StoreSubscriber.js';
 import StateComponent from '@core/components/StateComponent.js';
 import $ from '@core/dom';
-import { changeFromValue } from '@app/state/actions/currencyActions.js';
+import {
+  changeCurrencySelector,
+  changeFromValue,
+  openCurrencySelector,
+} from '@app/state/actions/currencyActions.js';
 import renderConverter from './converter.functions.js';
 
 export default class ConverterComponent extends StateComponent {
@@ -13,12 +17,16 @@ export default class ConverterComponent extends StateComponent {
       name: 'Converter',
       listeners: [
         'input',
+        'click',
       ],
       subscribe: [
         'value',
         'loadedRates',
         'loadingRates',
         'rates',
+        'from',
+        'to',
+        'openedCurrencySelector',
       ],
       ...options,
     });
@@ -26,6 +34,7 @@ export default class ConverterComponent extends StateComponent {
     this.components = options.components || [];
     this.store = options.store;
     this.eventDispatcher = options.eventDispatcher;
+    this.currencyService = options.currencyService;
     this.subscriber = new StoreSubscriber(this.store);
   }
 
@@ -60,8 +69,32 @@ export default class ConverterComponent extends StateComponent {
       clearTimeout(inputTimer);
     }
     this.inputTimer = setTimeout(() => {
-      this.$actionDispatch(changeFromValue(text));
+      this.$dispatchAction(changeFromValue(text));
     }, 1000);
+  }
+
+  onClick(event) {
+    const $target = $(event.target);
+    if ($target.data.type === 'currency') {
+      const { key } = $target.data;
+      const action = openCurrencySelector(key);
+      this.$dispatchAction(action);
+    }
+    if ($target.data.type === 'select-currency') {
+      const { symbol } = $target.data;
+      const state = this.store.getState();
+      const { openedCurrencySelector } = state;
+      const payload = { symbol };
+      if (openedCurrencySelector === 'from') {
+        payload.rates = this.currencyService.changeRates({
+          prevRates: state.rates,
+          nextBase: symbol,
+        });
+      }
+      const action = changeCurrencySelector(payload);
+
+      this.$dispatchAction(action);
+    }
   }
 
   init() {

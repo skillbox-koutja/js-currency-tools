@@ -37,7 +37,7 @@ export default class CurrencyService {
       });
   }
 
-  static changeRates({ prevRates, nextBase }) {
+  changeRates = ({ prevRates, nextBase }) => {
     const rates = {};
     const currencies = Object.keys(prevRates);
     const convert = (currency) => {
@@ -48,9 +48,9 @@ export default class CurrencyService {
     return rates;
   }
 
-  static convert({
+  convert = ({
     value, from, to, rates,
-  }) {
+  }) => {
     const ratio = rates[to] / rates[from];
     return ratio * value;
   }

@@ -46,4 +46,22 @@ handlers[actions.FINISH_FETCH_RATES] = applyChanges;
 handlers[actions.FAILED_FETCH_RATES] = applyChanges;
 handlers[actions.CHANGE_FROM_VALUE] = changeState('value');
 
+handlers[actions.OPEN_CURRENCY_SELECTOR] = applyChanges;
+handlers[actions.CHANGE_CURRENCY_CONVERTER] = (state, action) => {
+  const key = state.openedCurrencySelector;
+  const { symbol, rates = null } = action.payload;
+  const next = {
+    openedCurrencySelector: null,
+    [key]: symbol,
+  };
+  if (rates) {
+    next.rates = rates;
+  }
+
+  return {
+    ...state,
+    ...next,
+  };
+};
+
 export default handlers;

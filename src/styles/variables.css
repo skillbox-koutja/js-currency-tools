@@ -1,5 +1,14 @@
 :root {
     --main-bg-color: #505562;
+    --currency-li-bg-color: #2d2d37;
+    --from-currency-bg-color: #264d73;
+    --currencies-bg-color: #222;
+
     --main-txt-color: #fff;
+    --hover-txt-color: #666;
+
+    --main-border: 1px solid #fff;
+    --input-border: 2px solid #fff;
+
     --loader-color: #000;
 }
